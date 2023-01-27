@@ -26,35 +26,6 @@ export const config: TemplateConfig = {
 };
 */
 
-export const config: TemplateConfig = {
-  stream: {
-    $id: "byredo",
-    // Specifies the exact data that each generated document will contain. This data is passed in
-    // directly as props to the default exported function.
-    fields: [
-      "id",
-      "uid",
-      "meta",
-      "name",
-      "c_bannerTitle",
-      "c_bannerDescription",
-      "c_bannerImage",
-      "c_headerMenus",
-      "c_byradoLogo"
-      //"PhotoGallery",
-    ],
-    // Defines the scope of entities that qualify for this stream.
-   // filter: {
-     // entityTypes: ["location"],
-  //  },
-    // The entity language profiles that documents will be generated for.
-    localization: {
-      locales: ["en_GB"],
-      primary: false,
-    },
-  },
-};
-
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({relativePrefixToRoot, path, document}): HeadConfig => {
   return {
     title: document.name,

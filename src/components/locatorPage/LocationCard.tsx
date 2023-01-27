@@ -41,7 +41,7 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
       <h4><a href={`tel:${result.rawData.mainPhone}`}>{result.rawData.mainPhone}</a></h4>
      
       <Today data={result.rawData.hours} />
-      <GetDirection buttonText="Get Direction" address={address} lat={result.rawData?.cityCoordinate?.latitude} long={result.rawData?.cityCoordinate?.longitude} label="Get direction"/>
+      <GetDirection buttonText="Get Direction" address={address} lat={result.rawData?.geocodedCoordinate?.latitude} long={result.rawData?.geocodedCoordinate?.longitude} label="Get direction"/>
     </div >
   );
 }

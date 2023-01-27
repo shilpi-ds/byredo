@@ -3,8 +3,8 @@ import * as React from "react";
 type Cta = {
   buttonText: any;
   address: any;
-  latitude?: any;
-  longitude?: any;
+  latitude?: number;
+  longitude?: number;
   label: any;
 
 
@@ -36,6 +36,7 @@ const GetDirection = (props: Cta) => {
       };
       navigator.geolocation.getCurrentPosition(
         function (position) {
+          console.log(props);
           let currentLatitude = position.coords.latitude;
           let currentLongitude = position.coords.longitude;
           let getDirectionUrl =

@@ -3,7 +3,7 @@ import "../index.css";
 import { GetPath, Template, TemplateProps, TemplateRenderProps, TemplateConfig, GetHeadConfig,
   HeadConfig } from "@yext/pages";
 import { SearchHeadlessProvider, useSearchActions } from "@yext/search-headless-react";
-//import PageLayout from "../components/layouts/PageLayout";
+import Header from "../components/layouts/header";
 import SearchLayout from "../components/locatorPage/SearchLayout";
 import {  AnswerExperienceConfig  } from "../config/globalConfig";
 import PageLayout from "../components/page-layout";
@@ -26,6 +26,38 @@ export const config: TemplateConfig = {
 };
 */
 
+export const config: TemplateConfig = {
+  stream: {
+    $id: "byredo-locator",
+    // Specifies the exact data that each generated document will contain. This data is passed in
+    // directly as props to the default exported function.
+    fields: [
+      "id",
+      "uid",
+      "meta",
+      "name",
+      "c_bannerTitle",
+      "c_bannerDescription",
+      "c_bannerImage",
+      "c_headerMenus",
+      "c_byradoLogo"
+      //"PhotoGallery",
+    ],
+    filter: {
+      entityIds: ["global-data"],
+    },
+    // Defines the scope of entities that qualify for this stream.
+   // filter: {
+     // entityTypes: ["location"],
+  //  },
+    // The entity language profiles that documents will be generated for.
+    localization: {
+      locales: ["en_GB"],
+      primary: false,
+    },
+  },
+};
+
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({relativePrefixToRoot, path, document}): HeadConfig => {
   return {
     title: document.name,
@@ -44,7 +76,16 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({relativePrefi
 
 const locatorSearch: Template<TemplateRenderProps> = ({relativePrefixToRoot, path, document}) => {
 
-const { _site } = document;
+const {
+   _site,
+   c_bannerTitle,
+   c_bannerDescription,
+   c_bannerImage,
+   c_headerMenus,
+   c_byradoLogo
+
+
+} = document;
 
 const providerOptions: google.maps.MapOptions = {
   disableDefaultUI: true
@@ -52,7 +93,9 @@ const providerOptions: google.maps.MapOptions = {
 
 return (
     <>
-   <PageLayout _site={_site}>
+   <Header ByredoLogo={_site.c_byradoLogo} ByredoLinks={_site.c_headerMenus}/>
+        <HeaderBanner title={_site.c_bannerTitle} description={_site.c_bannerDescription} himage={_site.c_bannerImage.url} />
+       
    
         <SearchHeadlessProvider
             experienceKey={AnswerExperienceConfig.experienceKey}
@@ -65,7 +108,7 @@ return (
         >
            <SearchLayout/>           
         </SearchHeadlessProvider>  
-        </PageLayout> 
+       
     </>
   );
 };

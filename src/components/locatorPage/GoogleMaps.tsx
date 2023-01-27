@@ -4,10 +4,10 @@ import { useSearchState, Result } from "@yext/search-headless-react";
 import * as React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { twMerge, useComposedCssClasses } from '..//../hooks/useComposedCssClasses';
-import Mapicon from "..//../images/map-pin.svg";
-import MapiconHover from "..//../images/map-pin-hover.svg";
-import UserMarker from "..//../images/map-center.png";
-import Hours from '..//../components/commons/hours';
+import Mapicon from "../../images/map-pin.svg";
+import MapiconHover from "../../images/map-pin-hover.svg";
+import UserMarker from "../../images/map-center.png";
+import Hours from '../../components/commons/hours';
 import {renderToString} from "react-dom/server";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import Today from "../Today";
@@ -317,6 +317,9 @@ function Infowindow(i:Number,result:any):void{
         <div>   {metersToMiles(result.distance)} miles</div>
         <div className="nameData font-bold text-sm md:text-base"> <Address address={result.rawData.address} /></div>
         <div className="nameData font-bold text-sm md:text-base">{result.rawData.mainPhone} </div>
+        {/* <Today data={result.rawData.hours} />
+        <GetDirection buttonText="Get Direction" address={result.rawData.address} latitude={result.rawData?.cityCoordinate?.latitude} longitude={result.rawData?.cityCoordinate?.longitude} label="Get direction"/>
+     */}
         </div>
         );
     let string=renderToString(MarkerContent);    

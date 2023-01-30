@@ -9,7 +9,10 @@
     "c_byradoLogo",
     "c_bannerDescription",
     "c_bannerImage",
-    "c_bannerTitle"
+    "c_bannerTitle",
+    "c_footerHelpSection",
+    "c_servicesFooter",
+    "c_footerStoreLocator"
   ],
   "localization": {
     "locales": ["en_GB"],

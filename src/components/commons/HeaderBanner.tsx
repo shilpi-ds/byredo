@@ -16,23 +16,18 @@ const HeaderBanner = (props: Banner) => {
 
   return (
     <>
-      <div
-        className={`relative z-10 w-full bg-cover bg-center h-96 bg-[url(/src/assets/images/tacos-1.avif)] `}
-      >
-         <div style={{position:"relative"}}>
-          <img src={himage}/>
-       
-        <div style={{position:"absolute"}}>
-        <div style={{color:'#fff'}}>
-          {title}
-        </div>
-        <div style={{color:'#fff'}}>
-          {description}
-        </div>
-       </div> </div>
-      </div>
+     <div className = "head-text">
+  <div className = "head-image">
+  <img src={himage}/>
+  </div>
+    <div className='text-on-image'>
+       <h3> {title} </h3>
+       <p> {description} </p>
+    </div>
+</div>
     </>
   );
 };
 
 export default HeaderBanner;
+

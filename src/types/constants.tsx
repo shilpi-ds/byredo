@@ -10,7 +10,13 @@ export const googleMapsConfig = {
   centerLongitude: -0.118092,
   googleMapsApiKey: "AIzaSyDZNQlSlEIkFAct5VzUtsP4dSbvOr2bE18",
 };
-
+export function slugify(slugString: any) {
+  slugString.toLowerCase().toString();
+  slugString = slugString.replace(/[&\/\\#^+()$~%.'":*?<>{}!@]/g, "");
+  slugString = slugString.replaceAll("  ", "-");
+  slugString = slugString.replaceAll(" ", "-");
+  return slugString.toLowerCase();
+}
 export const AnswerExperienceConfig = {
   experienceKey: "byredo",
   locale: "en_GB",

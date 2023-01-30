@@ -17,21 +17,42 @@ import {
   TemplateConfig,
   TemplateProps,
   TemplateRenderProps,
+  TransformProps
 } from "@yext/pages";
 import * as React from "react";
+import { useEffect, useRef, useState } from 'react';
 import Banner from "../components/banner";
 import Details from "../components/details";
 import Hours from "../components/hours";
 import List from "../components/list";
 import Header from "../components/layouts/header";
+import Footer from "../components/layouts/footer";
 import BreadCrumbs from "../components/layouts/BreadCrumbs";
 import StaticMap from "../components/static-map";
 import Accordion from "../components/Accordion";
 import HeaderBanner from "../components/commons/HeaderBanner";
 import GetDirection from "../components/GetDirection";
-
+import PhotoSlider from "../components/locationDetails/PhotoSlider";
+import OpenCloseStatus from "../components/commons/OpenCloseStatus";
+import watch from "../images/watch.svg";
+import phone from "../images/phone.svg";
+import Address from "../components/commons/Address";
+import addressicon from "../images/marker.svg";
+import Faqs from "../components/locationDetails/Faqs";
+import { nearByLocation } from "../types/nearByLocation";
+import NearByLocations from "../components/locationDetails/NearByLocations";
 //import { accordionData } from './utils/content';
 import "../index.css";
+import {
+  slugify,
+  radius,
+  baseApiUrl,
+  liveAPIKey,
+  savedFilterId,
+  entityTypes,
+} from "../types/constants";
+
+import { useSearchState } from "@yext/search-headless-react";
 //import PhotoGallery from "../components/photo-gallery";
 
 /**
@@ -52,14 +73,24 @@ export const config: TemplateConfig = {
       "description",
       "hours",
       "slug",
+      "photoGallery",
       "geocodedCoordinate",
       "services",
       "c_bannerTitle",
       "c_bannerDescription",
       "c_bannerImage",
       "c_headerMenus",
-      "c_byradoLogo"
-      //"PhotoGallery",
+      "c_byradoLogo",
+      "c_footerHelpSection",
+    "c_servicesFooter",
+    "c_footerStoreLocator",
+      "timezone",
+        "additionalHoursText",
+      "c_relatedFaqs.question",
+      "c_relatedFaqs.answer",
+      "c_title",
+      "c_image"
+      
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -130,6 +161,8 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   };
 };
 
+
+
 /**
  * This is the main template. It can have any name as long as it's the default export.
  * The props passed in here are the direct stream document defined by `config`.
@@ -139,17 +172,25 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
  * components any way you'd like as long as it lives in the src folder (though you should not put
  * them in the src/templates folder as this is specific for true template files).
  */
+
+
+
+
 const Location: Template<TemplateRenderProps> = ({
   relativePrefixToRoot,
+  externalApiData,
+
   path,
   document,
 }) => {
   const {
     _site,
+    id,
     name,
     address,
     openTime,
     hours,
+    photoGallery,
     mainPhone,
     geocodedCoordinate,
     services,
@@ -158,46 +199,135 @@ const Location: Template<TemplateRenderProps> = ({
     c_bannerDescription,
     c_bannerImage,
     c_headerMenus,
-    c_byradoLogo
-   // photoGallery,
-    
+    c_byradoLogo,
+    c_footerHelpSection,
+    c_servicesFooter,
+    c_footerStoreLocator,
+    timezone,
+    additionalHoursText,
+    c_relatedFaqs,
+    c_title,
+    c_image
+       
         //photoGallery,
   } = document;
-  
 
 
+  const [timeStatus, setTimeStatus] = useState("");
+  const onOpenHide = () => {
+    if (timeStatus == "") {
+      setTimeStatus("active");
+    } else {
+      setTimeStatus("");
+    }
+  }
 
   return (
     <>
       <Header ByredoLogo={_site.c_byradoLogo} ByredoLinks={_site.c_headerMenus}/>
         <HeaderBanner title={_site.c_bannerTitle} description={_site.c_bannerDescription} himage={_site.c_bannerImage.url} />
-       
-        <div className="centered-container">
-          <div className="section">
-            <div className="grid grid-cols-2 gap-x-10 gap-y-10">
-              <div className="bg-gray-100 p-2">
-                <Details address={address} phone={mainPhone}></Details>
-                {services && <List list={services}></List>}
-                 </div>
-                     <div className="bg-gray-100 p-2">
+       <div className="container-section">
+      <div className="containers">
+      <div className="store-info">
+              <Address address={address} />
+                <div className="icon-row ">
+            {" "}
+            <span className="icon">
+              <img src={phone} />
+            </span>
+      <h4><a href={`tel:${mainPhone}`}>{mainPhone}</a></h4></div>
+      <div className="open-close notHighlight">
+          <div className="hours-sec ">
+            <div className="OpenCloseStatus notHighlight ">
+              {hours ? (
+                <>
+                  {Object.keys(hours).length > 1 ? (
+                    <>
+                      <div className="hours-labels icon-row">
+                        <span className="icon">
+                        <img src={watch}></img>
+                        </span>
+                        <a
+                          className={timeStatus}
+                          href="javascript:void(0);"
+                          onClick={onOpenHide}
+                        >
+                          <OpenCloseStatus
+                            timezone={timezone}
+                            hours={hours}
+                          ></OpenCloseStatus>
+                        </a>
+                        <svg
+                          onClick={onOpenHide}
+                          icon-row
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="9.585"
+                          height="4.793"
+                          viewBox="0 0 9.585 4.793"
+                        >
+                          <path
+                            id="hrd-drop"
+                            d="M9,13.5l4.793,4.793L18.585,13.5Z"
+                            transform="translate(-9 -13.5)"
+                            fill="#00363f"
+                          ></path>
+                        </svg>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
+              {hours ? (
+                <>
+                  <div className={timeStatus + " daylist"}>
+                    <Hours
+                      key={id}
+                      hours={hours} additionalHoursText={additionalHoursText}
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div></div>{" "}
+          <GetDirection buttonText="Get Direction" address={address} latitude={geocodedCoordinate?.latitude} longitude={geocodedCoordinate?.longitude} label="Get direction"/>
+  
+        </div>
+        <div className="store-hours">
                 {hours && <Hours title={"Restaurant Hours"} hours={hours} />}
               </div>
+              <div className="static-map">
               {geocodedCoordinate && (
                 <StaticMap
                   latitude={geocodedCoordinate.latitude}
                   longitude={geocodedCoordinate.longitude}
                 ></StaticMap>
               )}
-              <div className="bg-gray-100 p-2">
-                <div className="text-xl font-semibold">{`About ${name}`}</div>
-                <p className="pt-4">{description}</p>
-              </div>
-              
-            </div>
-           
-          </div>
+       </div>
         </div>
-      
+        <div className="about-content">
+                <div className="about-image"><img src={c_image.url} height={500} width={500}/></div>
+                <div className="about-data">
+                <div className="about-title">{c_title}</div>
+                <p className="about-description">{description}</p>
+                </div>
+              </div>
+              <div className="featured">
+              <h2>Featured Products</h2>
+              <div className="photo-slider">{photoGallery && <PhotoSlider photoGallery={photoGallery}/> }</div>
+      </div>
+      <div className="faq-content">
+        <div className="faq-title">How can we help ?</div>
+        <div className="faqs">{c_relatedFaqs && <Accordion content={c_relatedFaqs}/> }</div>
+        </div>
+        <NearByLocations latitude={geocodedCoordinate.latitude} longitude={geocodedCoordinate.longitude}/>
+      </div>
+      <Footer ByredoHelp={_site.c_footerHelpSection} ByredoServices={_site.c_servicesFooter} ByredoLocator={_site.c_footerStoreLocator}/>
     </>
   );
 };

@@ -6,7 +6,7 @@ import OpenCloseStatus from "../../components/commons/OpenCloseStatus";
 import {limit, radius, baseApiUrl, liveAPIKey, savedFilterId, entityTypes } from "../../config/globalConfig";
 import { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input';
 import Address from "../../components/commons/Address";
-import phonePin from "..//../images/phone.svg";
+import phonePin from "../../images/phone.svg";
 
 type props = {
   latitude: any;
@@ -19,7 +19,7 @@ const NearByLocations = (props:any) => {
     getRestoData();
   }, []);
   function getRestoData() {
-    let url = `${baseApiUrl}/entities/geosearch?radius=500&location=${latitude},${longitude}&api_key=${liveAPIKey}&v=20181201&resolvePlaceholders=true&entityTypes=${entityTypes}&limit=4`;
+    let url = `${baseApiUrl}/entities/geosearch?radius=500&location=${latitude},${longitude}&api_key=${liveAPIKey}&v=20181201&resolvePlaceholders=true&entityTypes=${entityTypes}&limit=3`;
     return axios.get(url)
       .then((res) => {
         setData(res.data.response.entities);
@@ -53,10 +53,10 @@ const NearByLocations = (props:any) => {
 							<div className="store-link">
 							<OpenCloseStatus timezone={i.timezone} hours={i.hours}></OpenCloseStatus>
 							</div>
-                            <div className="store-link">
-                       <GetDirection buttonText="Get Direction" className={"button location primary-button"} latitude={i.yextDisplayCoordinate.latitude}
+                            
+                       <GetDirection buttonText="Get Direction" latitude={i.yextDisplayCoordinate.latitude}
                   longitude={i.yextDisplayCoordinate.longitude} ></GetDirection>                  
-                            </div>
+                            
                           </div>                       
                       </>
                     );

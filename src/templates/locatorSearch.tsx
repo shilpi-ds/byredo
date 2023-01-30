@@ -8,6 +8,7 @@ import SearchLayout from "../components/locatorPage/SearchLayout";
 import {  AnswerExperienceConfig  } from "../config/globalConfig";
 import PageLayout from "../components/page-layout";
 import HeaderBanner from "../components/commons/HeaderBanner";
+import Footer from "../components/layouts/footer";
 export const getPath: GetPath<TemplateProps> = () => {
   return `index.html`;
 };
@@ -40,7 +41,10 @@ export const config: TemplateConfig = {
       "c_bannerDescription",
       "c_bannerImage",
       "c_headerMenus",
-      "c_byradoLogo"
+      "c_byradoLogo",
+      "c_footerHelpSection",
+    "c_servicesFooter",
+    "c_footerStoreLocator"
       //"PhotoGallery",
     ],
     filter: {
@@ -82,7 +86,10 @@ const {
    c_bannerDescription,
    c_bannerImage,
    c_headerMenus,
-   c_byradoLogo
+   c_byradoLogo,
+   c_footerHelpSection,
+    c_servicesFooter,
+    c_footerStoreLocator
 
 
 } = document;
@@ -108,7 +115,7 @@ return (
         >
            <SearchLayout/>           
         </SearchHeadlessProvider>  
-       
+        <Footer ByredoHelp={_site.c_footerHelpSection} ByredoServices={_site.c_servicesFooter} ByredoLocator={_site.c_footerStoreLocator}/>
     </>
   );
 };

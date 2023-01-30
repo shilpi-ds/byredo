@@ -317,9 +317,9 @@ function Infowindow(i:Number,result:any):void{
         <div>   {metersToMiles(result.distance)} miles</div>
         <div className="nameData font-bold text-sm md:text-base"> <Address address={result.rawData.address} /></div>
         <div className="nameData font-bold text-sm md:text-base">{result.rawData.mainPhone} </div>
-        {/* <Today data={result.rawData.hours} />
+        {/* <Today data={result.rawData.hours} />*/}
         <GetDirection buttonText="Get Direction" address={result.rawData.address} latitude={result.rawData?.cityCoordinate?.latitude} longitude={result.rawData?.cityCoordinate?.longitude} label="Get direction"/>
-     */}
+     
         </div>
         );
     let string=renderToString(MarkerContent);    

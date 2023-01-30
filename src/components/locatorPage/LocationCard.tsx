@@ -33,7 +33,7 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
 
   return (
     <div className={`location result`} id={`result-${result.index}`}>
-     <UseMyLocation/>
+     
      <div className="relative w-full">
       <h3 className=""><a href={result.rawData.slug}>{result.rawData.name} </a>
       </h3>

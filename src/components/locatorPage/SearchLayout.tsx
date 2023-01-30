@@ -12,6 +12,7 @@ import Geocode from "react-geocode";
 import useFetchResults from "../../hooks/useFetchResults";
 import FilterAwesome from "./FilterAwesome";
 import PerfectScrollbar from 'react-perfect-scrollbar'; 
+import UseMyLocation from "./UseMyLocation";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 const SearchLayout = (): JSX.Element => {
@@ -216,6 +217,7 @@ const optionClickHandler = () =>{
               <h3 className="title">
                 Find Locations
               </h3>
+              <UseMyLocation/>
               {/* <LocationBias />  */}
               <div className="search-form">
                 <FilterSearch
@@ -235,11 +237,11 @@ const optionClickHandler = () =>{
                       fieldApiName: "address.line1",
 
                     },
-                    {
-                      entityType: "location",
-                      fieldApiName: "address.line2",
+                    // {
+                    //   entityType: "location",
+                    //   fieldApiName: "address.line2",
 
-                    },
+                    // },
                     {
                       entityType: "location",
                       fieldApiName: "address.city",
@@ -250,10 +252,15 @@ const optionClickHandler = () =>{
                       fieldApiName: "address.postalCode",
 
                     },
-                    // {
-                    //   entityType: "location",
-                    //   fieldApiName: "builtin.location",                        
-                    // },
+                    {
+                      entityType: "location",
+                      fieldApiName: "address.countryCode",
+
+                    },
+                    {
+                      entityType: "location",
+                      fieldApiName: "builtin.location",                        
+                     },
                   ]}
                   
                 />

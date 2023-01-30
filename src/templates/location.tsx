@@ -325,7 +325,7 @@ const Location: Template<TemplateRenderProps> = ({
         <div className="faq-title">How can we help ?</div>
         <div className="faqs">{c_relatedFaqs && <Accordion content={c_relatedFaqs}/> }</div>
         </div>
-        <NearByLocations latitude={geocodedCoordinate.latitude} longitude={geocodedCoordinate.longitude}/>
+        
       </div>
       <Footer ByredoHelp={_site.c_footerHelpSection} ByredoServices={_site.c_servicesFooter} ByredoLocator={_site.c_footerStoreLocator}/>
     </>

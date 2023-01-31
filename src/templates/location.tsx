@@ -76,6 +76,10 @@ export const config: TemplateConfig = {
       "photoGallery",
       "geocodedCoordinate",
       "services",
+      "c_relatedFaqs.question",
+      "c_relatedFaqs.answer",
+      "c_title",
+      "c_image",
       "c_bannerTitle",
       "c_bannerDescription",
       "c_bannerImage",
@@ -86,10 +90,7 @@ export const config: TemplateConfig = {
     "c_footerStoreLocator",
       "timezone",
         "additionalHoursText",
-      "c_relatedFaqs.question",
-      "c_relatedFaqs.answer",
-      "c_title",
-      "c_image"
+      
       
     ],
     // Defines the scope of entities that qualify for this stream.
@@ -203,11 +204,12 @@ const Location: Template<TemplateRenderProps> = ({
     c_footerHelpSection,
     c_servicesFooter,
     c_footerStoreLocator,
-    timezone,
-    additionalHoursText,
     c_relatedFaqs,
     c_title,
-    c_image
+    c_image,
+    timezone,
+    additionalHoursText,
+   
        
         //photoGallery,
   } = document;
@@ -323,7 +325,7 @@ const Location: Template<TemplateRenderProps> = ({
       </div>
       <div className="faq-content">
         <div className="faq-title">How can we help ?</div>
-        <div className="faqs">{c_relatedFaqs && <Accordion content={c_relatedFaqs}/> }</div>
+        <div className="faqs"><section className="faq-container">{c_relatedFaqs && <Accordion content={c_relatedFaqs}/> }</section></div>
         </div>
         
       </div>

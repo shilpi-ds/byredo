@@ -15,17 +15,19 @@ const Accordion = ({content }) => {
   return (
 
     content.map((item:any,index) => {
-        console.log(index);
+        //console.log(index);
          return(
           <>
       
-
+      
     <div className="card" key={index}>
     <div className="card-header" onClick={()=>handleToggle(index)} style={{cursor:"pointer"}}>
-     <b>{(index===toggle)?'-':'+'}{item.question}</b></div>
-                        {(index===toggle)?<div className="card-body">{item.answer}</div>:''}
+     <h1 className="faq-page">{item.question}<span className="faq-sign">{(index===toggle)?'-':'+'}</span></h1></div>
+                        {(index===toggle)?<div className="faq-body"><p>{item.answer}</p></div>:''}
                      
                     </div>
+                    <hr className="hr-line"/>
+                  
           </>
          );
        })
@@ -35,3 +37,5 @@ const Accordion = ({content }) => {
 };
 
 export default Accordion;
+
+

@@ -117,6 +117,15 @@ const LocationCard: CardComponent<Location> = ({ result }) => {
         </div>
       
       <GetDirection buttonText="Get Direction" address={address} latitude={result.rawData?.cityCoordinate?.latitude} longitude={result.rawData?.cityCoordinate?.longitude} label="Get direction"/>
+      <div className="btn pt-5 pl-4">
+          <a href={result.rawData.slug} target="_blank">
+            <button className="border border-[#000000] hover:bg-[#000000] p-2 w-36 hover:text-white text-[#000000]  text-xs font-medium z-0 ">VIEW DETAIL</button>        
+          </a>
+          <a href="" target="_blank">
+            <button className="border border-[#000000] p-2 w-36 hover:bg-[#000000] hover:text-white text-[#000000] text-xs font-medium z-0 ">Direction</button>        
+          </a>
+        </div>
+    
     </div >
   );
 }

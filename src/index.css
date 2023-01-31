@@ -100,6 +100,80 @@ font-size: 35px;
 text-align: center;
 }
 
+.faq-heading{
+    border-bottom: #777;
+    padding: 20px 60px;
+}
+.faq-container{
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+.hr-line{
+  width: 60%;
+  margin: auto;
+  
+}
+/* Style the buttons that are used to open and close the faq-page body */
+.faq-page {
+    /* background-color: #eee; */
+    color: #444;
+    cursor: pointer;
+    padding: 30px 20px;
+    width: 60%;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin: auto;
+    font-size: 22px;
+}
+.faq-body{
+    margin: auto;
+    /* text-align: center; */
+   width: 50%; 
+   padding: auto;
+   
+}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.faq-page:hover {
+    background-color: #F9F9F9;
+}
+/* Style the faq-page panel. Note: hidden by default */
+.faq-body {
+    padding: 0 18px;
+    background-color: white;
+    /*//display: none;*/
+    overflow: hidden;
+}
+.faq-page:after {
+    /*content: '\02795';*/
+    /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+.active:after {
+    /*content: "\2796";*/
+    /* Unicode character for "minus" sign (-) */
+}
+.faq-sign{
+
+    align-items: right;
+    float: right;
+   font-size: x-large;
+
+}
+.result-list-inner .location{
+    background-color: #fff;
+}
+
+nav[aria-label="Pagination"] button:hover, nav[aria-label="Pagination"] button.bg-primary-light{
+    background-color: #000000;
+    color: #ffffff;
+}
+
 /* Base */
 html {
     @apply text-text-color text-base;
@@ -111,8 +185,18 @@ body {
     @apply text-text-color text-base leading-normal
 }
 .button {
-    @apply bg-primary-btn-bg-color text-base capitalize text-center font-medium text-white py-1 md:py-2.5 px-5 leading-7 inline-flex justify-center border-2 border-primary-btn-bg-color cursor-pointer hover:bg-primary-btn-bg-hover-color hover:text-primary-btn-text-hover-color
+    @apply bg-primary-btn-bg-color text-base capitalize text-center font-medium text-white py-1 md:py-2.5 px-5 leading-7 inline-flex justify-center border-2 border-primary-btn-bg-color cursor-pointer 
 }
+.button {
+    background-color: #000000;
+    color: #ffffff;
+
+    }
+    .button :hover{
+    background-color: #f5f5f5;
+    color: #000000;
+
+    }
 .button.secondary{
     @apply bg-boxed-primary-btn-bg-color text-boxed-primary-btn-text-color hover:bg-primary-btn-bg-color hover:text-white
 }
@@ -184,7 +268,7 @@ body {
 
 
 .result.active{
-    @apply bg-[#f7e4d9]; 
+    @apply bg-[#f5f5f5]; 
 }
 
 /* Search */
@@ -298,9 +382,9 @@ body {
 nav[aria-label="Pagination"] button{
     @apply rounded-none text-text-color border-button-border-color
 }
-nav[aria-label="Pagination"] button:hover, nav[aria-label="Pagination"] button.bg-primary-light{
+/*nav[aria-label="Pagination"] button:hover, nav[aria-label="Pagination"] button.bg-primary-light{
     @apply bg-button-border-color text-white
-}
+}*/
 nav[aria-label="Pagination"] button:disabled{
     @apply cursor-not-allowed text-opacity-60 bg-opacity-60
 }

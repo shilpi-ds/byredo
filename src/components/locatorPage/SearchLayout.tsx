@@ -14,7 +14,7 @@ import FilterAwesome from "./FilterAwesome";
 import PerfectScrollbar from 'react-perfect-scrollbar'; 
 import UseMyLocation from "./UseMyLocation";
 import 'react-perfect-scrollbar/dist/css/styles.css';
-
+import ViewMore from "./ViewMore";
 const SearchLayout = (): JSX.Element => {
 
   const searchActions = useSearchActions();
@@ -294,9 +294,9 @@ const optionClickHandler = () =>{
               </div>
             )}
 
-            <Pagination />
+            {/* <Pagination /> */}
            
-           
+            <ViewMore  className={" btn notHighlight lg:!w-[132%] !mb-2 button view-more"} idName={"view-more-button"} buttonLabel={"View More"} />
           </div>
           <div className="map-section">
             {/* <MapboxMap<Location>
